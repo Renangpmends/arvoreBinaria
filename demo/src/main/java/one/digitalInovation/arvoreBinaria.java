@@ -62,4 +62,71 @@ public class ArvoreBinaria <T extends Comparable<T>>{
             exibirPreOrdem(atual.getNoDireita());
         }
     }
+
+    public void remover(T conteudo){
+        try {
+            BinNo<T> atual = this.raiz;
+            BinNo<T> pai  = null;
+            BinNo<T> filho = null;
+            BinNo<T> temp = null;
+
+            while (atual != null && !atual.getConteudo().equals(conteudo)) {
+                pai = atual;
+                if(conteudo.compareTo(atual.getConteudo()) < 0){
+                    atual = atual.getNoEsquerda();
+                }else{
+                    atual = atual.getNoDireita();
+                }
+            }
+
+            if(atual == null){
+                System.out.println("conteudo nao encontrado. Bloco Try");
+            }
+
+            if(pai == null){
+                if(atual.getNoDireita() == null){
+                    this.raiz = atual.getNoEsquerda();
+                }else if(atual.getNoEsquerda() == null){
+                    this.raiz = atual.getNoDireita();
+                }else{
+                    for(temp = atual, filho = atual.getNoEsquerda(); filho.getNoDireita() != null; temp = filho, filho = filho.getNoEsquerda()){
+                        if(filho != atual.getNoEsquerda()){
+                            temp.setNoDireita(filho.getNoEsquerda());
+                            filho.setNoEsquerda(raiz.getNoEsquerda());
+                        }
+                    }
+                    filho.setNoDireita(raiz.getNoDireita());
+                    raiz = filho;
+                }
+            }else if(atual.getNoDireita() == null){
+                if(pai.getNoEsquerda() == atual){
+                    pai.setNoEsquerda(atual.getNoEsquerda());
+                }else{
+                    pai.setNoDireita(atual.getNoEsquerda());
+                }
+            }else if(atual.getNoEsquerda() == null){
+                if(pai.getNoEsquerda() == atual){
+                    pai.setNoEsquerda(atual.getNoDireita());
+                }else{
+                    pai.setNoDireita(atual.getNoDireita());
+                }
+            }else{
+                for(temp = atual, filho = atual.getNoEsquerda(); filho.getNoDireita() != null; temp = filho, filho = filho.getNoDireita()){
+                    if(filho != atual.getNoEsquerda()){
+                        temp.setNoDireita(filho.getNoEsquerda());
+                        filho.setNoEsquerda(atual.getNoEsquerda());
+                    }
+                    filho.setNoDireita(atual.getNoDireita());
+                    if(pai.getNoEsquerda() == atual){
+                        pai.setNoEsquerda(filho);
+                    }else{
+                        pai.setNoDireita(filho);
+                    }
+                }
+            }
+
+        } catch (NullPointerException erro) {
+            System.out.println("conteudo nao encontrado. Bloco Catch");
+        }
+    }
 }
