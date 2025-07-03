@@ -1,4 +1,4 @@
-package one.digitalInovation;
+package one.digitalinovation.BinNo;
 
 public class BinNo<T extends Comparable<T>> {
 

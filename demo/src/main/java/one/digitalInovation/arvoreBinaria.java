@@ -1,4 +1,4 @@
-import one.digitalInovation.BinNo;
+import one.digitalinovation.ArvoreBinaria;
 
 public class ArvoreBinaria <T extends Comparable<T>>{
 
@@ -38,7 +38,7 @@ public class ArvoreBinaria <T extends Comparable<T>>{
     }
 
      public void exibirPosOrdem(){
-        System.out.println("\n Exibindo PosOrdem");
+        System.out.print("\n Exibindo PosOrdem");
         exibirPosOrdem(this.raiz);
     }
 
@@ -46,18 +46,18 @@ public class ArvoreBinaria <T extends Comparable<T>>{
         if(atual != null){
             exibirPosOrdem(atual.getNoEsquerda());
             exibirPosOrdem(atual.getNoDireita());
-            System.out.println(atual.getConteudo() + ", ");
+            System.out.print(atual.getConteudo() + ", ");
         }
     }
 
       public void exibirPreOrdem(){
-        System.out.println("\n Exibindo PreOrdem");
+        System.out.print("\n Exibindo PreOrdem");
         exibirPreOrdem(this.raiz);
     }
 
     private void exibirPreOrdem(BinNo<T> atual){
         if(atual != null){
-            System.out.println(atual.getConteudo() + ", ");
+            System.out.print(atual.getConteudo() + ", ");
             exibirPreOrdem(atual.getNoEsquerda());
             exibirPreOrdem(atual.getNoDireita());
         }
